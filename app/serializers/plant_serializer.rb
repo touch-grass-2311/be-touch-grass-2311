@@ -5,4 +5,12 @@ class PlantSerializer
             :family_common_name, 
             :image_url, 
             :synonyms
+            :ph_max
+
+  def ph_max
+    binding.pry
+    if
+     plant.ph_max
+    end
+  end
 end

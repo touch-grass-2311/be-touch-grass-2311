@@ -6,7 +6,7 @@ class PlantsFacade
   end
 
   def self.plant_by_id(id)
-    x = plant_json = PlantsService.call_db("/api/v1/plants/#{id}")
-    plant_json.map { |plant| Plant.new(plant.last) }
+    plant_json = PlantsService.call_db("/api/v1/plants/#{id}")
+    Plant.new(plant_json[:data])
   end
 end

@@ -5,10 +5,10 @@ class Plant
               :scientific_name,
               :image_url,
               :edible,
-              :id
+              :id,
 
               # :bloom_months,
-              # :ph_max,
+              :ph_max
               # :ph_min,
               # :light,
               # :min_precipitation
@@ -22,8 +22,8 @@ class Plant
     @image_url = data[:image_url]
     @edible = data[:edible]
 
-     # @bloom_months = data[:main_species][:growth][:bloom_months]
-    # @ph_max = data[:main_species][:growth][:ph_max]
+    # @bloom_months = data[:main_species][:growth][:bloom_months]
+    @ph_max = data[:main_species][:growth][:ph_max].to_s
     # @ph_min = data[:main_species][:growth][:ph_min]
     # @light = data[:main_species][:growth][:light]
     # @min_precipitation = data[:main_species][:growth][:min_precipitation]
