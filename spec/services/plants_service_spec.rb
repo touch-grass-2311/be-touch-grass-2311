@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PlantsService do
-  it 'exists' do
+  it 'establishes a connection' do
     expect(PlantsService.connection).to be_a Faraday::Connection
   end
 
