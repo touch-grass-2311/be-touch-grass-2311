@@ -1,16 +1,31 @@
 class PlantSerializer
   include JSONAPI::Serializer
-  attributes :common_name, 
-            :scientific_name, 
-            :family_common_name, 
-            :image_url, 
-            :synonyms
-            :ph_max
 
-  def ph_max
-    binding.pry
-    if
-     plant.ph_max
-    end
-  end
+  attributes :common_name, 
+  :scientific_name, 
+  :family_common_name, 
+  :image_url, 
+  :synonyms,
+  :edible
+
+  attribute :ph_max, if: Proc.new {|plant, params|
+  params[:action] == "show"
+  }
+
+  attribute :ph_min, if: Proc.new {|plant, params|
+  params[:action] == "show"
+  }
+
+  attribute :bloom_months, if: Proc.new {|plant, params|
+  params[:action] == "show"
+  }
+
+  attribute :light, if: Proc.new {|plant, params|
+  params[:action] == "show"
+  }
+
+  attribute :min_precipitation, if: Proc.new {|plant, params|
+  params[:action] == "show"
+  }
 end
+  
