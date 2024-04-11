@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-04-10T17:29:53-07:00">2024-04-10T17:29:53-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-04-10T11:06:29-07:00">2024-04-10T11:06:29-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -73,7 +73,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#ee4a4807299004c8ac1d6b4eeb08c56849e5b7b3" class="src_link" title="app/services/plants_service.rb">app/services/plants_service.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">15</td>
+            <td class="cell--number">16</td>
             <td class="cell--number">10</td>
             <td class="cell--number">10</td>
             <td class="cell--number">0</td>
@@ -161,7 +161,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#e9223a0b47d63b3ee3cfcfed55524c73f635167a" class="src_link" title="config/routes.rb">config/routes.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">16</td>
+            <td class="cell--number">14</td>
             <td class="cell--number">3</td>
             <td class="cell--number">3</td>
             <td class="cell--number">0</td>
@@ -285,7 +285,7 @@
 
             
 
-            <code class="ruby">    JSON.parse(response.body, symbolize_names: true)		</code>
+            <code class="ruby">    x = JSON.parse(response.body, symbolize_names: true)		</code>
           </li>
         </div>
       
@@ -296,7 +296,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    require &#39;pry&#39;; binding.pry</code>
           </li>
         </div>
       
@@ -307,7 +307,7 @@
 
             
 
-            <code class="ruby">      </code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -318,7 +318,7 @@
 
             
 
-            <code class="ruby">  private		</code>
+            <code class="ruby">      </code>
           </li>
         </div>
       
@@ -329,7 +329,7 @@
 
             
 
-            <code class="ruby">      </code>
+            <code class="ruby">  private		</code>
           </li>
         </div>
       
@@ -340,7 +340,7 @@
 
             
 
-            <code class="ruby">  def self.connection		</code>
+            <code class="ruby">      </code>
           </li>
         </div>
       
@@ -351,7 +351,7 @@
 
             
 
-            <code class="ruby">    Faraday.new(&#39;https://trefle.io&#39;)		</code>
+            <code class="ruby">  def self.connection		</code>
           </li>
         </div>
       
@@ -362,12 +362,23 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    Faraday.new(&#39;https://trefle.io&#39;)		</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="15">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
             
             
 
@@ -2469,7 +2480,7 @@
 
             
 
-            <code class="ruby">  namespace :api do</code>
+            <code class="ruby">  resources :plants do </code>
           </li>
         </div>
       
@@ -2480,7 +2491,7 @@
 
             
 
-            <code class="ruby">    namespace :v1 do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2491,34 +2502,12 @@
 
             
 
-            <code class="ruby">      resources :plants, only: [:index, :show]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="14">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="15">
-            
-            
-
-            
-
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="16">
+          <li class="never" data-hits="" data-linenumber="14">
             
             
 
