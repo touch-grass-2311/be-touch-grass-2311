@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'plants index', type: :feature do
+RSpec.describe 'plants index', type: :request do
   describe 'As a visitor' do
     before(:each) do
       @plant = {
@@ -29,10 +29,47 @@ RSpec.describe 'plants index', type: :feature do
 
     it 'displays all plants' do
       # require 'pry'; binding.pry
-      visit plants_path
-      expect(page).to have_content("")
+      get '/api/v1/plants'
+      expect(response).to be_successful
+      
+      plants = JSON.parse(response.body, symbolize_names: :true)
+      plants[:data].each do |plant|
+        expect(plant).to have_key (:attributes)
+        expect(plant[:attributes]).to be_a Hash
+        expect(plant[:attributes]).to have_key (:scientific_name)
+        expect(plant[:attributes]).to have_key (:family_common_name)
+        expect(plant[:attributes]).to have_key (:image_url)
+        expect(plant[:attributes]).to have_key (:synonyms)
+
+        expect(plant[:attributes][:common_name]).to be_a String
+        expect(plant[:attributes][:scientific_name]).to be_a String
+        expect(plant[:attributes][:family_common_name]).to be_a String
+        expect(plant[:attributes][:image_url]).to be_a String
+        expect(plant[:attributes][:synonyms]).to be_an Array
+      end
     end
 
+    it 'displays plant by id' do
+  
+      get api_v1_plant_path(@plant[:id])
+      
+      plant_response = JSON.parse(response.body, symbolize_names: :true)
+      
+      plant = plant_response[:data].first
+      # binding.pry
+      expect(plant).to have_key (:attributes)
+      expect(plant[:attributes]).to be_a Hash
+      expect(plant[:attributes]).to have_key (:scientific_name)
+      expect(plant[:attributes]).to have_key (:family_common_name)
+      expect(plant[:attributes]).to have_key (:image_url)
+      expect(plant[:attributes]).to have_key (:synonyms)
+
+      expect(plant[:attributes][:common_name]).to be_a String
+      expect(plant[:attributes][:scientific_name]).to be_a String
+      expect(plant[:attributes][:family_common_name]).to be_a String
+      expect(plant[:attributes][:image_url]).to be_a String
+      expect(plant[:attributes][:synonyms]).to be_an Array
+    end
    
   end
 end

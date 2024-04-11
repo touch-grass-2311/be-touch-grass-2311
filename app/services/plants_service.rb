@@ -4,8 +4,7 @@ class PlantsService
       request.params = params		
       request.params[:token] = Rails.application.credentials.trefle[:key]		
     end		
-    x = JSON.parse(response.body, symbolize_names: true)		
-    require 'pry'; binding.pry
+    JSON.parse(response.body, symbolize_names: true)		
   end
       
   private		
