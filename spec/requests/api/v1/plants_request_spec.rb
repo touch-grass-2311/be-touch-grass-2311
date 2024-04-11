@@ -28,10 +28,8 @@ RSpec.describe 'plants index', type: :request do
     end
 
     it 'displays all plants' do
-      # require 'pry'; binding.pry
       get '/api/v1/plants'
       expect(response).to be_successful
-      
       plants = JSON.parse(response.body, symbolize_names: :true)
       plants[:data].each do |plant|
         expect(plant).to have_key (:attributes)
@@ -55,14 +53,20 @@ RSpec.describe 'plants index', type: :request do
       
       plant_response = JSON.parse(response.body, symbolize_names: :true)
       
-      plant = plant_response[:data].first
-      # binding.pry
+      plant = plant_response[:data]
+  
       expect(plant).to have_key (:attributes)
       expect(plant[:attributes]).to be_a Hash
       expect(plant[:attributes]).to have_key (:scientific_name)
       expect(plant[:attributes]).to have_key (:family_common_name)
       expect(plant[:attributes]).to have_key (:image_url)
       expect(plant[:attributes]).to have_key (:synonyms)
+      expect(plant[:attributes]).to have_key (:edible)
+      expect(plant[:attributes]).to have_key (:ph_min)
+      expect(plant[:attributes]).to have_key (:ph_max)
+      expect(plant[:attributes]).to have_key (:light)
+      expect(plant[:attributes]).to have_key (:min_precipitation)
+      expect(plant[:attributes]).to have_key (:bloom_months)
 
       expect(plant[:attributes][:common_name]).to be_a String
       expect(plant[:attributes][:scientific_name]).to be_a String
