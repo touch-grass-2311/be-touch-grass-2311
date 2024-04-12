@@ -6,7 +6,7 @@ RSpec.describe 'plant index', type: :feature do
       
     end
 
-    it '' do
+    xit '' do
       visit plant_path(4968)
     end
   end

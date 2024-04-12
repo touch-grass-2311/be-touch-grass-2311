@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'plants index', type: :request do
+RSpec.describe 'plants search', type: :request do
   describe 'As a visitor' do
     before(:each) do
       @plant = {
@@ -27,11 +27,12 @@ RSpec.describe 'plants index', type: :request do
     }
     end
 
-    it 'displays all plants' do
-      get '/api/v1/plants'
+    it "search endpoint" do 
+      get "/api/v1/search?q=evergreen"
       # require 'pry'; binding.pry
       expect(response).to be_successful
       plants = JSON.parse(response.body, symbolize_names: :true)
+      # require 'pry'; binding.pry
       plants[:data].each do |plant|
         expect(plant).to have_key (:attributes)
         expect(plant[:attributes]).to be_a Hash
@@ -39,6 +40,7 @@ RSpec.describe 'plants index', type: :request do
         expect(plant[:attributes]).to have_key (:family_common_name)
         expect(plant[:attributes]).to have_key (:image_url)
         expect(plant[:attributes]).to have_key (:synonyms)
+      
 
         expect(plant[:attributes][:common_name]).to be_a String
         expect(plant[:attributes][:scientific_name]).to be_a String
@@ -48,33 +50,5 @@ RSpec.describe 'plants index', type: :request do
       end
     end
 
-    it 'displays plant by id' do
-  
-      get api_v1_plant_path(@plant[:id])
-      
-      plant_response = JSON.parse(response.body, symbolize_names: :true)
-      
-      plant = plant_response[:data]
-  
-      expect(plant).to have_key (:attributes)
-      expect(plant[:attributes]).to be_a Hash
-      expect(plant[:attributes]).to have_key (:scientific_name)
-      expect(plant[:attributes]).to have_key (:family_common_name)
-      expect(plant[:attributes]).to have_key (:image_url)
-      expect(plant[:attributes]).to have_key (:synonyms)
-      expect(plant[:attributes]).to have_key (:edible)
-      expect(plant[:attributes]).to have_key (:ph_min)
-      expect(plant[:attributes]).to have_key (:ph_max)
-      expect(plant[:attributes]).to have_key (:light)
-      expect(plant[:attributes]).to have_key (:min_precipitation)
-      expect(plant[:attributes]).to have_key (:bloom_months)
-
-      expect(plant[:attributes][:common_name]).to be_a String
-      expect(plant[:attributes][:scientific_name]).to be_a String
-      expect(plant[:attributes][:family_common_name]).to be_a String
-      expect(plant[:attributes][:image_url]).to be_a String
-      expect(plant[:attributes][:synonyms]).to be_an Array
-    end
-   
-  end
-end
+  end 
+end 
