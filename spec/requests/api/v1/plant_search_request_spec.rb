@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'plants search', type: :request do
   describe 'As a visitor' do
     before(:each) do
@@ -25,8 +27,27 @@ RSpec.describe 'plants search', type: :request do
     }
     end
 
-    it "searches" do 
-      get api_v1_search_index_path(q: "Evergreen oak" "Quercus rotundifolia")
+    it "search endpoint" do 
+      get "/api/v1/search?q=evergreen"
+      # require 'pry'; binding.pry
+      expect(response).to be_successful
+      plants = JSON.parse(response.body, symbolize_names: :true)
+      # require 'pry'; binding.pry
+      plants[:data].each do |plant|
+        expect(plant).to have_key (:attributes)
+        expect(plant[:attributes]).to be_a Hash
+        expect(plant[:attributes]).to have_key (:scientific_name)
+        expect(plant[:attributes]).to have_key (:family_common_name)
+        expect(plant[:attributes]).to have_key (:image_url)
+        expect(plant[:attributes]).to have_key (:synonyms)
+      
+
+        expect(plant[:attributes][:common_name]).to be_a String
+        expect(plant[:attributes][:scientific_name]).to be_a String
+        expect(plant[:attributes][:family_common_name]).to be_a String
+        expect(plant[:attributes][:image_url]).to be_a String
+        expect(plant[:attributes][:synonyms]).to be_an Array
+      end
     end
 
   end 

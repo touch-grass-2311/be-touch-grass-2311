@@ -29,6 +29,7 @@ RSpec.describe 'plants index', type: :request do
 
     it 'displays all plants' do
       get '/api/v1/plants'
+      # require 'pry'; binding.pry
       expect(response).to be_successful
       plants = JSON.parse(response.body, symbolize_names: :true)
       plants[:data].each do |plant|
