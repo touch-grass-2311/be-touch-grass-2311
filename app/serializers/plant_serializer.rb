@@ -3,10 +3,10 @@ class PlantSerializer
 
   attributes :common_name, 
   :scientific_name, 
-  :family_common_name, 
+  # :family_common_name, 
   :image_url, 
-  :synonyms
-  # :edible
+  :synonyms,
+  :edible
 
   attribute :ph_max, if: Proc.new {|plant, params|
   params[:action] == "show"
