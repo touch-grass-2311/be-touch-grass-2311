@@ -23,7 +23,7 @@ class Plant
     @family_common_name = data[:family_common_name].to_s
     @scientific_name = data[:scientific_name]
     @image_url = data[:image_url]
-    @edible = data[:edible].to_s
+    # @edible = data[:edible].to_s
     @ph_max = extract_data(:ph_maximum)
     @bloom_months = extract_data(:bloom_months)
     @ph_min = extract_data(:ph_minimum)

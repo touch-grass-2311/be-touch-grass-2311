@@ -1,7 +1,7 @@
 class Api::V1::PlantsController < ApplicationController
   def index 
-  #  require 'pry'; binding.pry
     @plants = PlantsFacade.all_plants(params[:page])
+    binding.pry
     render json: PlantSerializer.new(@plants, {params: { action: params["action"]}}), status: :ok
   end
 
