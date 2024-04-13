@@ -1,7 +1,7 @@
 class Plant
   attr_reader :common_name,
               :synonyms,
-              :family_common_name,
+              # :family_common_name,
               :scientific_name,
               :image_url,
               :edible,
