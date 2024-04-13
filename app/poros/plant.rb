@@ -15,7 +15,6 @@ class Plant
               :family
 
   def initialize(data)
-    # require 'pry'; binding.pry
     @data = data
     @id = data[:id]
     @common_name = data[:common_name]
