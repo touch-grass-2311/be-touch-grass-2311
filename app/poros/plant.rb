@@ -19,10 +19,10 @@ class Plant
     @id = data[:id]
     @common_name = data[:common_name]
     @synonyms = data[:synonyms].nil? ? [] : data[:synonyms]
-    @family_common_name = data[:family_common_name].empty? ? "N/A" : data[:family_common_name]
+    @family_common_name = data[:family_common_name].to_s
     @scientific_name = data[:scientific_name]
     @image_url = data[:image_url]
-    @edible = data[:edible].empty? ? "N/A" : data[:edible]
+    @edible = data[:edible].to_s
     @ph_max = extract_data(:ph_maximum)
     @bloom_months = extract_data(:bloom_months)
     @ph_min = extract_data(:ph_minimum)
