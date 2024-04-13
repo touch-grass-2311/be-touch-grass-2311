@@ -3,7 +3,7 @@ class PlantSerializer
 
   attributes :common_name, 
   :scientific_name, 
-  # :family_common_name, 
+  :family_common_name, 
   :image_url, 
   :synonyms,
   :edible
