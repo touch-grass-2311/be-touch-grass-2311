@@ -1,7 +1,9 @@
 class PlantsFacade
 
-  def self.all_plants
-    plants = PlantsService.call_db("/api/v1/plants")
+  def self.all_plants(page_num = 1 )
+    params = { page: page_num}
+    plants = PlantsService.call_db("/api/v1/plants", params)
+   
   #  plants[:data].map { |plant| Plant.new(plant) }
    
    # require 'pry'; binding.pry
@@ -10,6 +12,7 @@ class PlantsFacade
   
   def self.plant_by_id(id)
     plant = PlantsService.call_db("/api/v1/plants/#{id}")
+    # require 'pry'; binding.pry
     Plant.new(plant[:data])
   end
   

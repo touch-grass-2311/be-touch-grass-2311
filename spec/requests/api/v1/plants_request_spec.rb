@@ -28,7 +28,7 @@ RSpec.describe 'plants index', type: :request do
     end
 
     it 'displays all plants' do
-      get '/api/v1/plants'
+      get '/api/v1/plants?page=1'
       # require 'pry'; binding.pry
       expect(response).to be_successful
       plants = JSON.parse(response.body, symbolize_names: :true)
@@ -48,12 +48,14 @@ RSpec.describe 'plants index', type: :request do
       end
     end
 
+   
+
     it 'displays plant by id' do
   
       get api_v1_plant_path(@plant[:id])
       
       plant_response = JSON.parse(response.body, symbolize_names: :true)
-      
+      # require 'pry'; binding.pry
       plant = plant_response[:data]
   
       expect(plant).to have_key (:attributes)
@@ -68,6 +70,7 @@ RSpec.describe 'plants index', type: :request do
       expect(plant[:attributes]).to have_key (:light)
       expect(plant[:attributes]).to have_key (:min_precipitation)
       expect(plant[:attributes]).to have_key (:bloom_months)
+      expect(plant[:attributes]).to have_key (:family)
 
       expect(plant[:attributes][:common_name]).to be_a String
       expect(plant[:attributes][:scientific_name]).to be_a String

@@ -11,6 +11,10 @@ class PlantSerializer
   attribute :ph_max, if: Proc.new {|plant, params|
   params[:action] == "show"
   }
+  
+  attribute :family, if: Proc.new {|plant, params|
+  params[:action] == "show"
+  }
 
   attribute :ph_min, if: Proc.new {|plant, params|
   params[:action] == "show"
