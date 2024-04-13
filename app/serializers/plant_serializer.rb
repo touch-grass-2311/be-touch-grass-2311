@@ -5,7 +5,7 @@ class PlantSerializer
   :scientific_name, 
   :family_common_name, 
   :image_url, 
-  :synonyms,
+  :synonyms
   # :edible
 
   attribute :ph_max, if: Proc.new {|plant, params|
