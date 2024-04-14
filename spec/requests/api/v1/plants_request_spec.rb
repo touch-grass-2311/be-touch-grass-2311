@@ -52,12 +52,11 @@ RSpec.describe 'plants index', type: :request do
 
     it 'displays plant by id' do
   
-      get api_v1_plant_path(@plant[:id])
+      get api_v1_plant_path(115385)
       
       plant_response = JSON.parse(response.body, symbolize_names: :true)
-      # require 'pry'; binding.pry
       plant = plant_response[:data]
-  
+      
       expect(plant).to have_key (:attributes)
       expect(plant[:attributes]).to be_a Hash
       expect(plant[:attributes]).to have_key (:scientific_name)

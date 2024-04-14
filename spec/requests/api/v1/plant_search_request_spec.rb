@@ -28,7 +28,7 @@ RSpec.describe 'plants search', type: :request do
     end
 
     it "search endpoint" do 
-      get "/api/v1/search?q=evergreen"
+      get "/api/v1/search?q=spinach"
       # require 'pry'; binding.pry
       expect(response).to be_successful
       plants = JSON.parse(response.body, symbolize_names: :true)

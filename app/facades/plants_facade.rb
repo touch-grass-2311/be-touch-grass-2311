@@ -2,19 +2,19 @@ class PlantsFacade
 
   def self.all_plants(page_num = 1 )
     params = { page: page_num}
-    plants = PlantsService.call_db("/api/v1/plants", params)
-    create_plant_poro(plants)
+    plants_response = PlantsService.call_db("/api/v1/plants", params)
+    plants = create_plant_poro(plants_response)
   end
   
   def self.plant_by_id(id)
-    plant = PlantsService.call_db("/api/v1/plants/#{id}")
-    Plant.new(plant[:data])
+    plant_response = PlantsService.call_db("/api/v1/plants/#{id}")
+    plant = Plant.new(plant_response[:data])
   end
   
   def self.search_plants(plant_name)
     params = { q: plant_name}
-    plants = PlantsService.call_db("/api/v1/plants/search", params  )
-    create_plant_poro(plants)
+    plants_response = PlantsService.call_db("/api/v1/plants/search", params  )
+    plants = create_plant_poro(plants_response)
   end
 
   def self.create_plant_poro(response)
