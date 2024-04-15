@@ -4,7 +4,6 @@ class PlantsService
     response = connection.get(url) do |request| 
       request.params = params
       request.params[:token] = ENV['TREFLE_API_KEY']
-      binding.pry
     end		
     JSON.parse(response.body, symbolize_names: true)		
     
