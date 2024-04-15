@@ -34,3 +34,4 @@
 coverage
 *coverage
 coverage/*
+.env
