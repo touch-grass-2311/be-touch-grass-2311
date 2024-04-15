@@ -1,4 +1,11 @@
 class Api::V1::UsersController < ApplicationController
+	# Don't think we need index or show (def not #index)
+	# any need for #show taken care of in #create (for now)
+	# any need for user profile page?
+	  # if OAuth login only, prob not
+		# if user email/pass login option created, would prob need 
+		  # to let users change emails/passwords
+
 	# def index
 	# 	render json: UserSerializer.new(User.all)
 	# end
@@ -9,30 +16,15 @@ class Api::V1::UsersController < ApplicationController
 	# end
 
 	def create
-		current_user = User.find_(uid: params[:uid])
+		current_user = User.find_or_create_by(
+			uid: params[:uid],
+			name: params[:name],
+			email: params[:email],
+		)
+		current_user.access_token = params[:access_token]
 
-		# already registered
-		# TODO should user table be updated to show user accessing account again?
-		#      * new access_token? (would need new column)
-		#      * track login streak? update timestamp in some way (save AT over current AT even if the same?)
-		#      	 - if current time minus updated_at >= 24hrs, a new 'consec_login_days' column could increment by 1?
-		#      	 - if current time minus updated_at < 24hrs, a new 'consec_login_days' column would reset to 1 (default val = 1)
-		if current_user
-			render json: UserSerializer.new(user)
-			return
-		else
-			user = User.new(
-				uid: params[:uid], 
-				name: params[:name], 
-				email: params[:email]
-			)
+		current_user.save
 
-			if user.save
-				render json: UserSerializer.new(user)
-			else
-				# replace w/ ErrorSerializer
-				render json: user.errors
-			end
-		end
+	 	render json: UserSerializer.new(current_user)
 	end
 end
