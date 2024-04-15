@@ -3,8 +3,7 @@ class PlantsService
   def self.call_db(url, params = {})		
     response = connection.get(url) do |request| 
       request.params = params
-      request.params[:token] = ENV['trefle']
-      binding.pry
+      request.params[:token] = ENV['TREFLE']
     end		
     JSON.parse(response.body, symbolize_names: true)		
     
