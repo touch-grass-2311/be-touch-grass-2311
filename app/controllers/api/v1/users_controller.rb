@@ -6,20 +6,11 @@ class Api::V1::UsersController < ApplicationController
 		# if user email/pass login option created, would prob need 
 		  # to let users change emails/passwords
 
-	# def index
-	# 	render json: UserSerializer.new(User.all)
-	# end
-
-	# def show
-	# 	user = User.find_by(uid: params[:uid])
-	# 	render json: UserSerializer.new(user)
-	# end
-
 	def create
 		current_user = User.find_or_create_by(
 			uid: params[:uid],
 			name: params[:name],
-			email: params[:email],
+			email: params[:email]
 		)
 		current_user.access_token = params[:access_token]
 
