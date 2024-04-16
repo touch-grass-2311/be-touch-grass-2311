@@ -21,5 +21,4 @@ class PlantsFacade
     response[:data].map { |plant| Plant.new(plant) }
   end
 
-  #why does this helper method not function
 end
