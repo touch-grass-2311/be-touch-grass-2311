@@ -1,4 +1,5 @@
 class Plant
+
   attr_reader :common_name,
               :synonyms,
               :family_common_name,
@@ -15,8 +16,9 @@ class Plant
               :family
 
   def initialize(data)
+    @data = data
     
-    @id = data[:id]
+    @id = data[:id].nil? ? "N/A" : data[:id]
     @common_name = data[:common_name].to_s
     @synonyms = data[:synonyms].nil? ? [] : data[:synonyms]
     @family_common_name = data[:family_common_name].to_s
@@ -31,6 +33,10 @@ class Plant
     @min_precipitation = extract_growth_data(data, :minimum_precipitation)
     @family = extract_main_species_data(data, :family)
 
+  end
+
+  def data_nil?
+    @data.nil?
   end
 
   private 
