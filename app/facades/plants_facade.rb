@@ -5,15 +5,15 @@ class PlantsFacade
     plants_response = PlantsService.call_db("/api/v1/plants", params)
     plants = create_plant_poro(plants_response)
   end
-  
+
   def self.plant_by_id(id)
     plant_response = PlantsService.call_db("/api/v1/plants/#{id}")
     plant = Plant.new(plant_response[:data])
   end
-  
-  def self.search_plants(plant_name)
-    params = { q: plant_name}
-    plants_response = PlantsService.call_db("/api/v1/plants/search", params  )
+
+  def self.search_plants(plant_name, page = 1)
+    params = { q: plant_name, page: page }
+    plants_response = PlantsService.call_db("/api/v1/plants/search", params)
     plants = create_plant_poro(plants_response)
   end
 
