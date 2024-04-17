@@ -6,7 +6,7 @@ class PlantsFacade
     plants_response = PlantsService.call_db("/api/v1/plants", params)
     plants = create_plant_poro(plants_response)
   end
-  
+
   def self.plant_by_id(id)
     plant_response = PlantsService.call_db("/api/v1/plants/#{id}")
     if plant_response[:error] != true 
@@ -16,8 +16,8 @@ class PlantsFacade
     end 
   end
   
-  def self.search_plants(plant_name)
-    params = { q: plant_name}
+  def self.search_plants(plant_name, page = 1)
+    params = { q: plant_name, page: page }
     plants_response = PlantsService.call_db("/api/v1/plants/search", params  )
 
     if plants_response[:error] != true || !params.present?
@@ -25,10 +25,13 @@ class PlantsFacade
     else
       raise ApiError, plants_response[:message]
     end
+
   end
 
   def self.create_plant_poro(response)
     response[:data].map { |plant| Plant.new(plant) }
   end
 
+
 end
+
