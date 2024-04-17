@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApplicationController
 		current_user = User.find_by(uid: user_params[:uid])
 
 		if current_user
-			# current_user.update(access_token: params[:access_token])
+			current_user.update(access_token: params[:access_token])
 			render json: UserSerializer.new(current_user)
 		else
 			new_user = User.new(user_params)

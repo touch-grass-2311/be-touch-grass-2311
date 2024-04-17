@@ -90,7 +90,7 @@ RSpec.describe 'plants index', type: :request do
       data = JSON.parse(response.body, symbolize_names: true)
 
       expect(data[:error]).to eq("Couldn't find Species with 'id'=134453787")
-    end 
+    end  
 
     
    
