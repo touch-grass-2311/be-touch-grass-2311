@@ -50,5 +50,15 @@ RSpec.describe 'plants search', type: :request do
       end
     end
 
+    it "search endpoint SAD PATH" do 
+      get "/api/v1/search?q=jsjjdjjdjdj"
+      # require 'pry'; binding.pry
+    
+      plants = JSON.parse(response.body, symbolize_names: :true)
+      # require 'pry'; binding.pry
+      expect(plants).to have_key(:data)
+      plant = plants[:data]
+      expect(plant).to eq([])
+    end
   end 
 end 
