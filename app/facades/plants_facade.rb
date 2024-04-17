@@ -19,7 +19,12 @@ class PlantsFacade
   def self.search_plants(plant_name)
     params = { q: plant_name}
     plants_response = PlantsService.call_db("/api/v1/plants/search", params  )
-    plants = create_plant_poro(plants_response)
+
+    if plants_response[:error] != true || !params.present?
+      plants = create_plant_poro(plants_response)
+    else
+      raise ApiError, plants_response[:message]
+    end
   end
 
   def self.create_plant_poro(response)
