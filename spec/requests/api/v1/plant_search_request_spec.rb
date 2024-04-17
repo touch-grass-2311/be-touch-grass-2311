@@ -50,5 +50,22 @@ RSpec.describe 'plants search', type: :request do
       end
     end
 
+    it "search endpoint SAD PATH" do 
+      get "/api/v1/search?q=jsjjdjjdjdj"
+    
+      plants = JSON.parse(response.body, symbolize_names: :true)
+      expect(plants).to have_key(:data)
+      plant = plants[:data]
+      expect(plant).to eq([])
+    end
+
+    it 'does not display search when "q" is not in query params' do
+      get "/api/v1/search?banana"
+      
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+      data = JSON.parse(response.body, symbolize_names: true)
+      expect(data[:error]).to eq("param is missing or the value is empty: q")
+    end
   end 
 end 
