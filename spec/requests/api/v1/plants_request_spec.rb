@@ -53,6 +53,9 @@ RSpec.describe 'plants index', type: :request do
     it 'displays plant by id' do
   
       get api_v1_plant_path(115385)
+
+      expect(response).to be_successful
+
       
       plant_response = JSON.parse(response.body, symbolize_names: :true)
       plant = plant_response[:data]
@@ -78,33 +81,16 @@ RSpec.describe 'plants index', type: :request do
       expect(plant[:attributes][:synonyms]).to be_an Array
     end
 
-    xit 'does not displays plant when id is invalid ' do
-  
-      get api_v1_plant_path(78788787889909)
+    it 'does not displays plant when id is invalid ' do
+      get "/api/v1/plants/134453787"
+      
       expect(response).to_not be_successful
-      plant_response = JSON.parse(response.body, symbolize_names: :true)
-      plant = plant_response[:data]
+      expect(response.status).to eq(404)
       
-      expect(plant).to have_key (:attributes)
-      expect(plant[:attributes]).to be_a Hash
-      expect(plant[:attributes]).to have_key (:scientific_name)
-      expect(plant[:attributes]).to have_key (:family_common_name)
-      expect(plant[:attributes]).to have_key (:image_url)
-      expect(plant[:attributes]).to have_key (:synonyms)
-      expect(plant[:attributes]).to have_key (:edible)
-      expect(plant[:attributes]).to have_key (:ph_min)
-      expect(plant[:attributes]).to have_key (:ph_max)
-      expect(plant[:attributes]).to have_key (:light)
-      expect(plant[:attributes]).to have_key (:min_precipitation)
-      expect(plant[:attributes]).to have_key (:bloom_months)
-      expect(plant[:attributes]).to have_key (:family)
+      data = JSON.parse(response.body, symbolize_names: true)
 
-      expect(plant[:attributes][:common_name]).to be_a String
-      expect(plant[:attributes][:scientific_name]).to be_a String
-      expect(plant[:attributes][:family_common_name]).to be_a String
-      expect(plant[:attributes][:image_url]).to be_a String
-      expect(plant[:attributes][:synonyms]).to be_an Array
-    end
+      expect(data[:error]).to eq("Couldn't find Species with 'id'=134453787")
+    end 
 
     
    
