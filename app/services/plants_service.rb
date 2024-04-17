@@ -1,11 +1,12 @@
 class PlantsService					
- 		
-  def self.call_db(url, params = {})		
-    response = connection.get(url) do |request| 
-      request.params = params		
-      request.params[:token] = Rails.application.credentials.trefle[:key]
-    end		
-    JSON.parse(response.body, symbolize_names: true)		
+
+  def self.call_db(url, params = {})	
+  response = connection.get(url) do |request|
+    request.params = params
+    request.params[:token] = ENV['TREFLE_API_KEY']
+    
+  end		
+  JSON.parse(response.body, symbolize_names: true)		
     
   end
       

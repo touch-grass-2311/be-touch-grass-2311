@@ -52,12 +52,14 @@ RSpec.describe 'plants index', type: :request do
 
     it 'displays plant by id' do
   
-      get api_v1_plant_path(@plant[:id])
+      get api_v1_plant_path(115385)
+
+      expect(response).to be_successful
+
       
       plant_response = JSON.parse(response.body, symbolize_names: :true)
-      # require 'pry'; binding.pry
       plant = plant_response[:data]
-  
+      
       expect(plant).to have_key (:attributes)
       expect(plant[:attributes]).to be_a Hash
       expect(plant[:attributes]).to have_key (:scientific_name)
@@ -78,6 +80,19 @@ RSpec.describe 'plants index', type: :request do
       expect(plant[:attributes][:image_url]).to be_a String
       expect(plant[:attributes][:synonyms]).to be_an Array
     end
+
+    it 'does not displays plant when id is invalid ' do
+      get "/api/v1/plants/134453787"
+      
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+      
+      data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(data[:error]).to eq("Couldn't find Species with 'id'=134453787")
+    end 
+
+    
    
   end
 end

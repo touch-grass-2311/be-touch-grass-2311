@@ -1,25 +1,29 @@
 class PlantsFacade
+ 		class ApiError < StandardError; end 
 
-  def self.all_plants(page_num = 1 )
+  def self.all_plants(page_num )
     params = { page: page_num}
-    plants = PlantsService.call_db("/api/v1/plants", params)
-    create_plant_poro(plants)
+    plants_response = PlantsService.call_db("/api/v1/plants", params)
+    plants = create_plant_poro(plants_response)
   end
   
   def self.plant_by_id(id)
-    plant = PlantsService.call_db("/api/v1/plants/#{id}")
-    Plant.new(plant[:data])
+    plant_response = PlantsService.call_db("/api/v1/plants/#{id}")
+    if plant_response[:error] != true 
+      plant = Plant.new(plant_response[:data])
+    else 
+      raise ApiError, plant_response[:message]
+    end 
   end
   
   def self.search_plants(plant_name)
     params = { q: plant_name}
-    plants = PlantsService.call_db("/api/v1/plants/search", params  )
-    create_plant_poro(plants)
+    plants_response = PlantsService.call_db("/api/v1/plants/search", params  )
+    plants = create_plant_poro(plants_response)
   end
 
   def self.create_plant_poro(response)
     response[:data].map { |plant| Plant.new(plant) }
   end
 
-  #why does this helper method not function
 end

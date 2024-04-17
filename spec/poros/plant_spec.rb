@@ -19,14 +19,16 @@ RSpec.describe Plant do
 
     it 'Plant Show poro' do
       expect(@plant2_show).to be_a(Plant)
-      expect(@plant.ph_max).to be_a(String)
-      expect(@plant.ph_min).to be_a(String)
-      expect(@plant.bloom_months).to be_a(String)
-      expect(@plant.edible).to be_a(String)
-      expect(@plant.image_url).to be_a(String)
-      expect(@plant.scientific_name).to eq("Quercus rotundifolia")
-      expect(@plant.light).to be_a(String)
-      expect(@plant.min_precipitation).to be_a(String)
+      expect(@plant2_show.ph_max).to eq(7.5)
+      expect(@plant2_show.ph_min).to eq(7.0)
+      expect(@plant2_show.bloom_months).to eq(["jun", "jul", "aug", "sep"])
+      expect(@plant2_show.edible).to eq true
+      expect(@plant2_show.edible_part).to eq ["leaves"]
+      expect(@plant2_show.image_url).to be_a(String)
+      expect(@plant2_show.scientific_name).to eq("Spinacia oleracea")
+      expect(@plant2_show.light).to eq(7)
+      expect(@plant2_show.min_precipitation).to be_a(Hash)
+      expect(@plant2_show.family).to eq("Amaranthaceae")
 
     end
   end
