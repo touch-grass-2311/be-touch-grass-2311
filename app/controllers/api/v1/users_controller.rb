@@ -7,15 +7,26 @@ class Api::V1::UsersController < ApplicationController
 		  # to let users change emails/passwords
 
 	def create
-		current_user = User.find_or_create_by(
-			uid: params[:uid],
-			name: params[:name],
-			email: params[:email]
-		)
-		current_user.access_token = params[:access_token]
+		current_user = User.find_by(uid: user_params[:uid])
 
-		current_user.save
+		if current_user
+			# current_user.update(access_token: params[:access_token])
+			render json: UserSerializer.new(current_user)
+		else
+			new_user = User.new(user_params)
+			new_user.plants = []
 
-	 	render json: UserSerializer.new(current_user)
+			if new_user.save
+				render json: UserSerializer.new(new_user)
+			else
+				render json: current_user.errors.full_messages
+			end
+		end
+	end
+	
+	private
+	
+	def user_params
+		params.require(:user).permit(:uid, :name, :email, :avatar_url, :access_token)
 	end
 end
