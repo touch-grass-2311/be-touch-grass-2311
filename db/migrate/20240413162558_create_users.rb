@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :email
       t.string :plants, array: true, default: []
-      t.string :uid
       t.timestamps
     end
   end
