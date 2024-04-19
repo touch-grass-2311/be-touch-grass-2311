@@ -12,7 +12,6 @@ Rails.application.routes.draw do
       resources :plants, only: [:index, :show]
       resources :search, only: [:index]
       resources :users, only: [:index, :show, :create, :update] do
-        resources :plants, controller: "user_plants", only: [:index, :show, :create]
       end
     end
   end
