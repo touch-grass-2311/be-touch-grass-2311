@@ -23,6 +23,17 @@ class Api::V1::UsersController < ApplicationController
 			end
 		end
 	end
+
+	def show
+		user = User.find(params[:id])
+		render json: UserSerializer.new(user)
+	end
+
+	def update
+		user = User.find(params[:id])
+		user.update_plants(params[:plant_id])
+		user.save
+	end
 	
 	private
 	
