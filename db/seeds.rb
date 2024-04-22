@@ -9,9 +9,9 @@
 #   end
 
 # create users
-# require 'factory_bot_rails'
-# require 'faker'
+require 'factory_bot_rails'
+require 'faker'
 
 
-# FactoryBot.create_list(:user, 19)
-# FactoryBot.create(:user, uid: "13741144")
+FactoryBot.create_list(:user, 19)
+FactoryBot.create(:user, uid: "13741144")
