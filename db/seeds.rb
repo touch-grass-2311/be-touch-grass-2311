@@ -8,6 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+10.times do
+	
+end
+
 # create users
 require 'factory_bot_rails'
 require 'faker'
