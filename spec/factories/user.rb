@@ -1,8 +1,11 @@
+require "faker"
+
 FactoryBot.define do
   factory :user do
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
+    name { Faker::Name.name }
     email { Faker::Internet.email }
-    password_digest { "pass123" }
+    uid { Faker::Bank.account_number(digits: 8) }
+    access_token { Faker::Alphanumeric.alphanumeric(number: 12) }
+    # state { "MyString" }
   end
 end
